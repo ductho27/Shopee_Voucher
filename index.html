@@ -59,21 +59,33 @@
 </div>
 
 <script>
-    function convertLink() {
-        const link = document.getElementById('rawLink').value;
-        const subId = "tho_affiliate"; // Bạn có thể thay đổi sub-id theo ý muốn
-        if(link) {
-            // Đây là logic giả định, bạn có thể thay bằng API Shopee/TikTok nếu có
-            const converted = link + "?sp_atk=" + subId; 
-            document.getElementById('result').innerHTML = `Link của bạn: <a href="${converted}" target="_blank">Bấm vào đây</a>`;
-        } else {
-            alert("Vui lòng dán link!");
-        }
+// Đoạn JavaScript trong index.html
+async function convertLink() {
+    const userLink = document.getElementById('rawLink').value;
+    const resDiv = document.getElementById('result');
+    
+    // Dán link Ngrok từ Bước 4 vào đây
+    const myApiUrl = "https://abcd-123.ngrok-free.app/convert"; 
+
+    resDiv.innerText = "Hệ thống đang điều khiển Edge để lấy link...";
+
+    try {
+        const response = await fetch(myApiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ link: userLink })
+        });
+        const data = await response.json();
+        resDiv.innerHTML = `Link của bạn: <a href="${data.affiliate_link}" target="_blank">Bấm vào đây</a>`;
+    } catch (err) {
+        resDiv.innerText = "Lỗi: Đảm bảo Thọ đã đóng Edge và đang chạy script Python!";
     }
+}
 </script>
 
 </body>
 
 </html>
+
 
 
