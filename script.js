@@ -1,9 +1,8 @@
 // Cấu hình thông số AccessTrade
 const CONFIG = {
-    TOKEN: "i5sn5-oDwBOtVzOUHVjJdwRe02aaoyy9",
-    CAMPAIGN_ID: "4751584435713464237",
+    TOKEN: "i5sn5-oDwBOtVzOUHVjJdwRe02aaoyy9", // Hãy dán mã Token dài dằng dặc của Thọ vào đây
+    CAMPAIGN_ID: "4751584435713464237", // Mã số Thọ vừa lấy được trên thanh địa chỉ
     API_URL: "https://api.accesstrade.vn/v1/product_link/create",
-    // Proxy để tránh lỗi CORS khi chạy trên trình duyệt
     PROXY: "https://api.allorigins.win/raw?url=" 
 };
 
@@ -21,14 +20,17 @@ document.getElementById('generateBtn').addEventListener('click', async () => {
     generateBtn.disabled = true;
 
     try {
-        const response = await fetch(CONFIG.PROXY + encodeURIComponent(CONFIG.API_URL), {
+        // Gọi API qua Proxy để tránh lỗi CORS
+        const finalUrl = CONFIG.PROXY + encodeURIComponent(CONFIG.API_URL);
+        
+        const response = await fetch(finalUrl, {
             method: 'POST',
             headers: {
                 'Authorization': `Token ${CONFIG.TOKEN}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "campaign_id": CONFIG.CONFIG.CAMPAIGN_ID,
+                "campaign_id": CONFIG.CAMPAIGN_ID, // ĐÃ SỬA: Bỏ chữ .CONFIG bị thừa
                 "urls": [originUrl],
                 "utm_source": "team_duc_tho_web"
             })
@@ -36,7 +38,7 @@ document.getElementById('generateBtn').addEventListener('click', async () => {
 
         const result = await response.json();
 
-        if (result.success) {
+        if (result.success && result.data.success_link.length > 0) {
             const shortLink = result.data.success_link[0].short_link;
             
             // Hiển thị kết quả
@@ -44,11 +46,11 @@ document.getElementById('generateBtn').addEventListener('click', async () => {
             document.getElementById('openBtn').href = shortLink;
             document.getElementById('resultArea').style.display = 'block';
         } else {
-            alert("Lỗi từ AccessTrade: " + result.message);
+            alert("Lỗi từ AccessTrade: " + (result.message || "Không tạo được link"));
         }
     } catch (error) {
         console.error("Lỗi hệ thống:", error);
-        alert("Có lỗi kết nối. Hãy đảm bảo Token và Campaign ID chính xác.");
+        alert("Có lỗi kết nối. Thọ kiểm tra lại Token hoặc Proxy nhé!");
     } finally {
         generateBtn.innerText = "TẠO LINK MUA HÀNG";
         generateBtn.disabled = false;
@@ -59,6 +61,6 @@ document.getElementById('generateBtn').addEventListener('click', async () => {
 document.getElementById('copyBtn').addEventListener('click', () => {
     const link = document.getElementById('affLink').innerText;
     navigator.clipboard.writeText(link).then(() => {
-        alert("Đã copy link! Gửi cho bạn bè ngay thôi.");
+        alert("Đã copy link thành công!");
     });
 });
