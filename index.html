@@ -10,7 +10,7 @@
             --success-color: #28a745;
             --bg-color: #f4f7f6;
             --danger-color: #d9534f;
-            --purple-tho: #6f42c1; /* Màu tím cho thầy bói */
+            --purple-tho: #6f42c1;
         }
 
         body { 
@@ -60,7 +60,6 @@
             border: 1px solid #eee;
         }
 
-        /* Khu vực bói toán */
         .fortune-box {
             background: #fff0f6;
             border: 2px dashed var(--purple-tho);
@@ -97,6 +96,7 @@
             padding: 10px; 
             border-radius: 8px;
             display: none;
+            word-wrap: break-word;
         }
 
         .aff-links a { 
@@ -156,8 +156,8 @@
 </div>
 
 <script>
-    // --- THỌ CẬP NHẬT LINK NGROK TẠI ĐÂY ---
-    const BASE_URL = "https://eaa8-2001-ee0-4141-611d-f998-7707-f08c-c584.ngrok-free.app/convert"; 
+    // --- ĐỊA CHỈ NGROK (Đã xóa /convert ở cuối để tránh lỗi 404) ---
+    const BASE_URL = "https://eaa8-2001-ee0-4141-611d-f998-7707-f08c-c584.ngrok-free.app"; 
 
     async function handleLogin() {
         const staffId = document.getElementById('staffIdInput').value.trim().toUpperCase();
@@ -190,7 +190,6 @@
         if (savedName) showMainContent(savedName);
     }
 
-    // --- HÀM 1: CHUYỂN LINK (GỌI QUA PYTHON) ---
     async function convertLink() {
         const userLink = document.getElementById('rawLink').value.trim();
         const resDiv = document.getElementById('result');
@@ -209,11 +208,16 @@
             const data = await response.json();
             if (data.affiliate_link) {
                 resDiv.innerHTML = `✅ Xong! <a href="${data.affiliate_link}" target="_blank" style="color: var(--success-color);">Mở Link Affiliate</a>`;
-            } else { resDiv.innerText = "❌ Lỗi: " + (data.error || "Thử lại sau"); }
-        } catch (err) { resDiv.innerText = "🚫 Check Ngrok/Server Thọ ơi!"; }
+            } else { 
+                resDiv.style.color = "var(--danger-color)";
+                resDiv.innerText = "❌ Lỗi: " + (data.error || "Thử lại sau"); 
+            }
+        } catch (err) { 
+            resDiv.style.color = "var(--danger-color)";
+            resDiv.innerText = "🚫 Check Ngrok/Server Thọ ơi!"; 
+        }
     }
 
-    // --- HÀM 2: BÓI TOÁN (GỌI QUA PYTHON) ---
     async function askMasterTho() {
         const question = document.getElementById('fortuneQuestion').value.trim();
         const resDiv = document.getElementById('fortune-result');
@@ -229,8 +233,10 @@
                 body: JSON.stringify({ question: question })
             });
             const data = await response.json();
-            resDiv.innerText = "🔮 " + data.answer;
-        } catch (err) { resDiv.innerText = "🚫 Thầy đang đi vắng (Check Ngrok)!"; }
+            resDiv.innerText = "🔮 " + (data.answer || "Thầy đang suy ngẫm...");
+        } catch (err) { 
+            resDiv.innerText = "🚫 Thầy đang đi vắng (Check Ngrok)!"; 
+        }
     }
 </script>
 </body>
