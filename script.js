@@ -1,7 +1,7 @@
 // Cấu hình thông số AccessTrade
 const CONFIG = {
-    TOKEN: "MÃ_TOKEN_CỦA_BẠN",
-    CAMPAIGN_ID: "MÃ_CHIẾN_DỊCH_CỦA_BẠN",
+    TOKEN: "i5sn5-oDwBOtVzOUHVjJdwRe02aaoyy9",
+    CAMPAIGN_ID: "4751584435713464237",
     API_URL: "https://api.accesstrade.vn/v1/product_link/create",
     // Proxy để tránh lỗi CORS khi chạy trên trình duyệt
     PROXY: "https://api.allorigins.win/raw?url=" 
