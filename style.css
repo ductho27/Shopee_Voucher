@@ -164,13 +164,22 @@ hr {
 /* Nút Zalo liên hệ */
 /* Container chứa biểu tượng và chữ */
 .zalo-container {
-    display: flex;
-    flex-direction: column; /* Chữ nằm dưới biểu tượng cho đẹp */
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    margin-top: 20px;
-    transition: 0.3s;
+    display: flex; /* Kích hoạt chế độ hộp linh hoạt */
+    flex-direction: column; /* Xếp ảnh và chữ theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0ff;
+    border-radius: 15px;
+    border: 1px solid #e0e0ff;
+}
+
+.zalo-container img {
+    width: 60px; /* Điều chỉnh kích thước icon Zalo cho vừa mắt */
+    height: auto;
+    margin-bottom: 10px; /* Tạo khoảng cách với dòng chữ bên dưới */
+    display: block; /* Loại bỏ khoảng trống thừa dưới ảnh */
 }
 
 /* Hiệu ứng nhịp đập cho biểu tượng */
