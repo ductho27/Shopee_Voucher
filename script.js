@@ -60,11 +60,15 @@ async function convertLink() {
             resDiv.innerHTML = `
                 <div class="success-box">
                     <p style="color: var(--success-color); font-size: 1.2rem;">✅ Chuyển đổi thành công!</p>
-                    <a href="${data.affiliate_link}" target="_blank" class="final-link">Mở Link Affiliate của Thọ</a>
+        
+                    <a href="${data.affiliate_link}" target="_blank" class="buy-now-btn">
+                        <span class="sticker">🛒</span> MUA NGAY - ĐỪNG BỎ LỠ!
+                    </a>
+        
                     <hr>
                     <div class="commission-info">
                         💰 <b>Hoa hồng của bạn:</b> 4.5% - 15%<br>
-                        <span>Nhấn vào nút dưới đây để nhận thưởng nhé!</span>
+                        <span>Nhấn vào nút trên để nhận thưởng!</span>
                     </div>
                     <a href="https://zalo.me/SỐ_ĐIỆN_THOẠI" target="_blank" class="zalo-container">
                         <div class="zalo-icon-wrapper">
