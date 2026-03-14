@@ -38,15 +38,20 @@
             <div id="result"></div>
         </div>
 
-        <div class="fortune-box">
-            <h4 style="color: var(--purple-tho);">🔮 Thầy Thọ Phán Quẻ</h4>
-            <textarea id="fortuneQuestion" 
-          placeholder="Hỏi thầy: Muốn bói chính xác thì cho thầy họ tên đầy đủ, ngày tháng năm sinh và câu hỏi của con thì thầy mới bói chuẩn được"
-          rows="3"></textarea>
-            <button class="btn-fortune" onclick="askMasterTho()">Xem Quẻ Ngay</button>
-            <div id="fortune-result"></div>
-        </div>
+        <div class="div-purple-tho-small" style="position: relative;">
+            <h4>🔮 Thầy Thọ Phán Quẻ</h4>
 
+            <div class="magic-input-container">
+                <div class="fire-ghastly" id="ghastlyFire"></div>
+        
+                <textarea id="fortuneQuestion" 
+                      placeholder="Hỏi thầy: Muốn bói chính xác thì cho thầy họ tên đầy đủ, ngày tháng năm sinh..."
+                      rows="3"
+                      oninput="updateFireSize()"></textarea> </div>
+
+            <button class="btn-fortune" onclick="askMasterTho()">Xem Quẻ Ngay</button>
+        </div>
+        
         <div class="aff-links">
             <h4>Sản phẩm khuyên dùng</h4>
             <a href="#" target="_blank">💻 Máy tính X99 Cấu Hình Khủng</a>
