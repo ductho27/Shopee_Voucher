@@ -227,7 +227,7 @@
         resDiv.innerText = "🔮 Thầy Thọ đang gieo quẻ...";
 
         try {
-            const response = await fetch(`${BASE_URL}`, {
+            const response = await fetch(`${BASE_URL}/fortune`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ question: question })
