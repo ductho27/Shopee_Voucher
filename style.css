@@ -303,3 +303,22 @@ button:disabled {
     50% { opacity: 0.7; }
     100% { opacity: 1; }
 }
+#fortuneQuestion {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--purple-tho);
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 0.95rem;
+    resize: none; /* Không cho người dùng kéo dãn lung tung */
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Hiệu ứng khi người dùng click vào ô bói */
+#fortuneQuestion:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
+    border-color: #8e44ad;
+}
