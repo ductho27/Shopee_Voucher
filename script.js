@@ -57,7 +57,21 @@ async function convertLink() {
         const data = await response.json();
 
         if (data.affiliate_link) {
-            resDiv.innerHTML = `✅ Xong! <a href="${data.affiliate_link}" target="_blank" style="color: var(--success-color); text-decoration: underline;">Mở Link Affiliate</a>`;
+            resDiv.innerHTML = `
+                <div class="success-box">
+                    <p style="color: var(--success-color); font-size: 1.2rem;">✅ Chuyển đổi thành công!</p>
+                    <a href="${data.affiliate_link}" target="_blank" class="final-link">Mở Link Affiliate của Thọ</a>
+                    <hr>
+                    <div class="commission-info">
+                        💰 <b>Hoa hồng của bạn:</b> 4.5% - 15%<br>
+                        <span>Nhấn vào nút dưới đây để nhận thưởng nhé!</span>
+                    </div>
+                    <a href="https://zalo.me/0328982137" target="_blank" class="zalo-btn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+                        Liên hệ Zalo Admin
+                    </a>
+                </div>
+            `;
             
             // --- KHU VỰC BẮN PHÁO HOA ---
             confetti({
