@@ -1,7 +1,5 @@
 // --- ĐỊA CHỈ NGROK ---
 const BASE_URL = "https://eaa8-2001-ee0-4141-611d-f998-7707-f08c-c584.ngrok-free.app"; 
-
-// --- 1. XỬ LÝ ĐĂNG NHẬP ---
 async function handleLogin() {
     const staffIdInput = document.getElementById('staffIdInput');
     const msg = document.getElementById('login-msg');
