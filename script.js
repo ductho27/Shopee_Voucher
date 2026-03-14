@@ -5,7 +5,7 @@ const BASE_URL = "https://eaa8-2001-ee0-4141-611d-f998-7707-f08c-c584.ngrok-free
 async function handleLogin() {
     const staffId = document.getElementById('staffIdInput').value.trim().toUpperCase();
     const msg = document.getElementById('login-msg');
-    if (!staffId) return msg.innerText = "⚠️ Nhập mã nhân viên Thọ ơi!";
+    if (!staffId) return msg.innerText = "⚠️ Nhập mã nhân viên bạn iu ơi!";
 
     try {
         const response = await fetch('employees.json');
@@ -42,11 +42,11 @@ window.onload = () => {
 async function convertLink() {
     const userLink = document.getElementById('rawLink').value.trim();
     const resDiv = document.getElementById('result');
-    if(!userLink) return alert("Dán link đã Thọ ơi!");
+    if(!userLink) return alert("Dán link đã bạn iu ơi!");
 
     resDiv.style.display = "block";
     resDiv.style.color = "var(--primary-color)";
-    resDiv.innerText = "🔍 Đang điều khiển Bot... chờ xíu nhé!";
+    resDiv.innerText = "🔍 Đang lấy link... chờ xíu nhé!, thưn lắm";
 
     try {
         const response = await fetch(`${BASE_URL}/convert`, {
