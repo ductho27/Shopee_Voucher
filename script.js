@@ -38,11 +38,16 @@ window.onload = () => {
     if (savedName) showMainContent(savedName);
 }
 
-// --- TÍNH NĂNG 1: CHUYỂN LINK ---
+// --- TÍNH NĂNG 1: CHUYỂN LINK (ĐÃ NÂNG CẤP GỬI STAFF_ID) ---
 async function convertLink() {
     const userLink = document.getElementById('rawLink').value.trim();
     const resDiv = document.getElementById('result');
+    
+    // Lấy mã nhân viên đã lưu lúc đăng nhập
+    const currentStaffId = localStorage.getItem('staffId'); 
+
     if(!userLink) return alert("Dán link đã Thọ ơi!");
+    if(!currentStaffId) return alert("Hết phiên đăng nhập, hãy tải lại trang nhé!");
 
     resDiv.style.display = "block";
     resDiv.style.color = "var(--primary-color)";
@@ -52,27 +57,27 @@ async function convertLink() {
         const response = await fetch(`${BASE_URL}/convert`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ link: userLink })
+            // GỬI KÈM STAFF_ID SANG PYTHON ĐỂ ĐIỀN VÀO SUB_ID1
+            body: JSON.stringify({ 
+                link: userLink,
+                staff_id: currentStaffId 
+            })
         });
         const data = await response.json();
 
         if (data.affiliate_link) {
+            // ... (Giữ nguyên phần hiển thị success-box và confetti của Thọ) ...
             resDiv.innerHTML = `
                 <div class="success-box">
                     <p style="color: var(--success-color); font-size: 1.2rem; font-weight: bold;">✅ Chuyển đổi thành công!</p>
-                    
                     <a href="${data.affiliate_link}" target="_blank" class="buy-now-btn">
-                        <span class="sticker">🔥</span> 
-                        ẤN MUA NGAY TẠI ĐÂY ĐỂ HOÀN TIỀN!👈
-                        <span class="sticker">🛒</span>
+                        <span class="sticker">🔥</span> ẤN MUA NGAY TẠI ĐÂY ĐỂ HOÀN TIỀN!👈 <span class="sticker">🛒</span>
                     </a>
-
                     <hr>
                     <div class="commission-info">
-                        💰 <b>Hoa hồng của bạn:</b> 4.5% - 15%<br>
+                        💰 <b>Hoa hồng của bạn:</b> 4.5% - 15% (Mã: ${currentStaffId})<br>
                         <span>Nhấn vào biểu tượng Zalo để nhận thưởng!</span>
                     </div>
-                    
                     <a href="https://zalo.me/0328982137" target="_blank" class="zalo-container">
                         <div class="zalo-icon-wrapper">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
@@ -81,16 +86,7 @@ async function convertLink() {
                     </a>
                 </div>
             `;
-            
-            // --- KHU VỰC BẮN PHÁO HOA ---
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#0056b3', '#28a745', '#ffeb3b', '#ff5722']
-            });
-            // ---------------------------
-
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#0056b3', '#28a745', '#ffeb3b', '#ff5722'] });
         } else { 
             resDiv.style.color = "var(--danger-color)";
             resDiv.innerText = "❌ Lỗi: " + (data.error || "Thử lại sau"); 
