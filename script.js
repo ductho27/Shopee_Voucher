@@ -1,6 +1,31 @@
 // --- ĐỊA CHỈ NGROK ---
 const BASE_URL = "https://eaa8-2001-ee0-4141-611d-f998-7707-f08c-c584.ngrok-free.app"; 
 
+// --- 1. XỬ LÝ ĐĂNG NHẬP ---
+async function handleLogin() {
+    const staffIdInput = document.getElementById('staffIdInput');
+    const msg = document.getElementById('login-msg');
+    
+    if (!staffIdInput) return;
+    const staffId = staffIdInput.value.trim().toUpperCase();
+    
+    if (!staffId) return msg.innerText = "⚠️ Nhập mã nhân viên bạn iu ơi!";
+
+    try {
+        const response = await fetch('employees.json');
+        const userList = await response.json();
+        if (userList[staffId]) {
+            localStorage.setItem('userName', userList[staffId]);
+            localStorage.setItem('staffId', staffId);
+            showMainContent(userList[staffId]);
+        } else {
+            msg.innerText = "❌ Mã không tồn tại!";
+        }
+    } catch (err) { 
+        msg.innerText = "⚠️ Lỗi: Kiểm tra file employees.json!"; 
+    }
+}
+
 function showMainContent(name) {
     const loginScreen = document.getElementById('login-screen');
     const mainContent = document.getElementById('main-content');
@@ -16,10 +41,11 @@ function handleLogout() {
     location.reload(); 
 }
 
-// Khi trang web load xong, không cần check gì cả, cứ để người dùng dùng luôn
+// Chạy khi trang web vừa load xong
 window.onload = () => {
-    console.log("Văn phòng Thầy Thọ đã sẵn sàng!");
-};
+    const savedName = localStorage.getItem('userName');
+    if (savedName) showMainContent(savedName);
+}
 
 // --- 2. TÍNH NĂNG 1: CHUYỂN LINK ---
 async function convertLink() {
@@ -107,35 +133,5 @@ async function askMasterTho() {
         resDiv.innerText = "🔮 " + (data.answer || "Thầy đang suy ngẫm...");
     } catch (err) { 
         resDiv.innerText = "🚫 Thầy đang đi vắng (Check Ngrok)!"; 
-    }
-}
-//---------Xử lý ngọn lửa------------------
-function updateFireSize() {
-    const question = document.getElementById('fortuneQuestion').value.trim();
-    const fire = document.getElementById('ghastlyFire');
-    
-    if (question.length === 0) {
-        // Không có chữ thì tắt lửa
-        fire.classList.remove('fire-active');
-        fire.style.height = "30px";
-        return;
-    }
-
-    // Nếu có chữ, kích hoạt lửa cháy mờ ảo
-    fire.classList.add('fire-active');
-
-    // Công thức tính lửa: càng nhiều chữ lửa càng cao
-    // Ví dụ: tối thiểu 30px, tối đa khoảng 150px
-    let baseHeight = 30; // Chiều cao lửa ban đầu nhỏ
-    let heightFromText = Math.min(question.length * 1.5, 120); // Tăng 1.5px cho mỗi ký tự
-    let newHeight = baseHeight + heightFromText;
-
-    fire.style.height = `${newHeight}px`; // Cập nhật chiều cao lửa thực tế
-    
-    // Càng nhiều chữ lửa càng đỏ hơn cho kịch tính
-    if (newHeight > 100) {
-        fire.style.background = radial-gradient(circle, #ff1f1f, #a36cf3, transparent);
-    } else {
-        fire.style.background = radial-gradient(circle, #ff4757, #a36cf3, transparent);
     }
 }
