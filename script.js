@@ -36,30 +36,49 @@ async function askMasterTho() {
     const question = document.getElementById('fortuneQuestion').value.trim();
     const resultDiv = document.getElementById('fortune-result');
     const loading = document.getElementById('fortune-loading');
+    
     if (!question) return alert("Nhập câu hỏi đã Thọ ơi!");
 
     resultDiv.style.display = 'none';
     loading.style.display = 'block';
 
+    // Dán API Key Gemini của Thọ vào đây
+    const API_KEY = "AIzaSyAIOz-0PxZcUqwzx9VROA1Hfcn95bjRH28"; 
+    
+    // URL của Gemini API
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
     try {
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `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` // NHỚ THAY KEY ALL PERMISSIONS NHÉ
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: [{role: "system", content: "Bạn là Thầy Thọ bói toán hài hước, khuyên mua Shopee."}, {role: "user", content: question}]
+                contents: [{
+                    parts: [{
+                        text: `Bạn là 'Thầy Thọ', một thầy bói vui tính tại Việt Nam. 
+                               Nhiệm vụ: Trả lời câu hỏi bói toán hài hước, dùng từ ngữ dân gian, 
+                               sau đó luôn khuyên họ mua sắm trên Shopee để giải hạn. 
+                               Câu hỏi là: ${question}`
+                    }]
+                }]
             })
         });
+
         const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error.message);
+        }
+
+        const answer = data.candidates[0].content.parts[0].text;
         loading.style.display = 'none';
-        resultDiv.innerText = "Thầy Thọ phán: " + (data.choices[0].message.content);
+        resultDiv.innerText = "🔮 Thầy Thọ phán: " + answer;
         resultDiv.style.display = 'block';
+
     } catch (error) {
         loading.style.display = 'none';
-        alert("Thầy Thọ đang bận, thử lại sau nhé!");
+        alert("Thầy Thọ đang bận xem quẻ khác, Thọ kiểm tra lại Key nhé!");
+        console.error("Lỗi Gemini:", error);
     }
 }
 
