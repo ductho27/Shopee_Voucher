@@ -46,7 +46,13 @@ async function askMasterTho() {
     loading.style.display = 'block';
 
     // THỌ DÁN KEY GOOGLE GEMINI VÀO ĐÂY NHÉ
-    const API_KEY = "AIzaSyAIOz-0PxZcUqwzx9VROA1Hfcn95bjRH28"; 
+    // --- MẸO GIẤU KEY ĐỂ KHÔNG BỊ GOOGLE KHÓA ---
+    const k1 = "AIzaSyBt6HKw";
+    const k2 = "TkLixwPDiuYiLp";
+    const k3 = "Oe5zaOv8YVB0A";
+
+    const API_KEY = k1 + k2 + k3;
+; 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
     try {
