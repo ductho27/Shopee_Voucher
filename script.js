@@ -133,6 +133,7 @@ async function askMasterTho() {
         resDiv.innerText = "🚫 Thầy đang đi vắng (Check Ngrok)!"; 
     }
 }
+//---------Xử lý ngọn lửa------------------
 function updateFireSize() {
     const question = document.getElementById('fortuneQuestion').value.trim();
     const fire = document.getElementById('ghastlyFire');
