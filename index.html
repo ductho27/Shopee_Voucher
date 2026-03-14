@@ -4,72 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Đức Thọ & Affiliate</title>
-    
     <link rel="stylesheet" href="style.css">
-
-    <script type="text/javascript">
-        var _atsmarttag = { pub_id: '5318594335759026755' }; //
-        (function () {
-            var script = document.createElement('script');
-            script.src = '//static.accesstrade.vn/js/v2/atsmarttag.min.js?v=1.1.0'; //
-            script.type = 'text/javascript';
-            script.async = true;
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script); //
-        })();
-    </script>
 </head>
 <body>
 
 <div class="container">
-    <div id="login-screen">
-        <h2>🔐 Hệ Thống Team Thọ</h2>
-        <input type="text" id="staffIdInput" placeholder="Nhập mã nhân viên của bạn...">
-        <button class="btn btn-login" onclick="handleLogin()">VÀO HỆ THỐNG</button>
-        <p id="login-msg" style="color: red; margin-top: 10px; font-weight: bold;"></p>
-    </div>
-    <div id="main-content">
-        <h2 id="welcome-msg">Chào mừng bạn!</h2>
-
-        <div class="converter-box">
-            <p style="font-weight: bold;">Chuyển đổi Link Shopee:</p>
-            <input type="text" id="rawLink" placeholder="Dán link Shopee tại đây...">
-            <button class="btn btn-convert" onclick="generateLink()">TẠO LINK MUA HÀNG</button>
+    <div class="card">
+        <div class="header">
+            <h1>🚀 Team Đức Thọ</h1>
+            <p>Affiliate Automation Tool</p>
         </div>
-        <div class="fortune-box">
-            <h3>🔮 Thầy Thọ Bói Vui</h3>
-            <p style="font-size: 0.8rem; margin-bottom: 10px;">Nhập tên và câu hỏi (ví dụ: Tài lộc tháng này thế nào?) để thầy giải quẻ!</p>
-            <input type="text" id="fortuneQuestion" class="fortune-input" placeholder="Họ tên và điều muốn hỏi...">
-            <button class="btn btn-fortune" onclick="askMasterTho()">XEM QUẺ NGAY</button>
-    
-            <div class="loading-spinner" id="fortune-loading"></div>
-            <div id="fortune-result"></div>
+        
+        <div class="input-group">
+            <label for="originUrl">Dán link sản phẩm (Shopee, Lazada, Tiki...)</label>
+            <input type="text" id="originUrl" placeholder="https://shopee.vn/ten-san-pham...">
+            <button id="generateBtn">TẠO LINK MUA HÀNG</button>
         </div>
-        <div id="result-box">
-            <p style="color: #2e7d32; font-weight: bold;">🎉 KÈO THƠM CHO BẠN!</p>
-            <div style="background: #fff; border: 2px solid #ffc107; padding: 15px; border-radius: 15px; margin: 10px 0;">
-                <p style="margin: 5px 0; color: #d32f2f; font-weight: bold; font-size: 1.1rem;">
-                🎁 TỶ LỆ HOÀN TIỀN CỦA BẠN: <span id="percent-amount">4.5%</span>
-                </p>
-                <p style="font-size: 0.85rem; color: #555;">(Tỷ lệ này áp dụng trên tổng giá trị đơn hàng bạn mua!)</p>
+        
+        <div id="resultArea" class="result-box" style="display: none;">
+            <p>Link của bạn đã sẵn sàng:</p>
+            <div class="link-display">
+                <span id="affLink"></span>
             </div>
-
-            <a href="#" id="finalLink" target="_blank" class="buy-now-btn">🚀 ẤN VÀO MUA NGAY 🛒</a>
-
-            <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
-                <p style="font-size: 0.9rem; font-weight: bold; color: #0056b3;">Muốn nhận nhiều hoa hồng hơn?</p>
-                <a href="https://zalo.me/0328982137" target="_blank" class="shake-animation">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" width="25" alt="Zalo">
-                    LIÊN HỆ ADMIN QUA ZALO
-
-                </a>
+            <div class="button-group">
+                <button id="copyBtn" class="btn-copy">Sao chép link</button>
+                <a id="openBtn" href="#" target="_blank" class="btn-open">Mở link ngay</a>
             </div>
         </div>
-
-        <button class="btn btn-logout" onclick="handleLogout()">Đăng xuất</button>
+        
+        <div class="footer">
+            <p>© 2026 Team Đức Thọ & Affiliate</p>
+        </div>
     </div>
 </div>
 
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
