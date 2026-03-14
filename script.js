@@ -1,10 +1,14 @@
 // --- ĐỊA CHỈ NGROK ---
 const BASE_URL = "https://eaa8-2001-ee0-4141-611d-f998-7707-f08c-c584.ngrok-free.app"; 
 
-// --- XỬ LÝ ĐĂNG NHẬP ---
+// --- 1. XỬ LÝ ĐĂNG NHẬP ---
 async function handleLogin() {
-    const staffId = document.getElementById('staffIdInput').value.trim().toUpperCase();
+    const staffIdInput = document.getElementById('staffIdInput');
     const msg = document.getElementById('login-msg');
+    
+    if (!staffIdInput) return;
+    const staffId = staffIdInput.value.trim().toUpperCase();
+    
     if (!staffId) return msg.innerText = "⚠️ Nhập mã nhân viên bạn iu ơi!";
 
     try {
@@ -23,9 +27,13 @@ async function handleLogin() {
 }
 
 function showMainContent(name) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
-    document.getElementById('welcome-msg').innerText = `Chào bạn, ${name}! 👋`;
+    const loginScreen = document.getElementById('login-screen');
+    const mainContent = document.getElementById('main-content');
+    const welcomeMsg = document.getElementById('welcome-msg');
+    
+    if (loginScreen) loginScreen.style.display = 'none';
+    if (mainContent) mainContent.style.display = 'block';
+    if (welcomeMsg) welcomeMsg.innerText = `Chào bạn, ${name}! 👋`;
 }
 
 function handleLogout() { 
@@ -33,12 +41,13 @@ function handleLogout() {
     location.reload(); 
 }
 
+// Chạy khi trang web vừa load xong
 window.onload = () => {
     const savedName = localStorage.getItem('userName');
     if (savedName) showMainContent(savedName);
 }
 
-// --- TÍNH NĂNG 1: CHUYỂN LINK ---
+// --- 2. TÍNH NĂNG 1: CHUYỂN LINK ---
 async function convertLink() {
     const userLink = document.getElementById('rawLink').value.trim();
     const resDiv = document.getElementById('result');
@@ -51,7 +60,7 @@ async function convertLink() {
     resDiv.innerHTML = `
         <div class="waiting-box">
             <p>🔍 Đang kết nối với Bot...</p>
-            <p style="font-size: 0.9rem; color: #666;">Hàng chờ ưu tiên của bạn đang được thiết lập.</p>
+            <p style="font-size: 0.9rem; color: #666;">Đang xử lý trong hàng chờ ưu tiên của Thọ.</p>
         </div>
     `;
 
@@ -65,17 +74,47 @@ async function convertLink() {
         const data = await response.json();
 
         if (data.affiliate_link) {
-            // Khi thành công, hiện pháo hoa và nút Mua ngay như cũ
-            // (Chép lại đoạn resDiv.innerHTML có nút Mua Ngay và Zalo của Thọ vào đây)
+            // Khi thành công, hiện giao diện MUA NGAY và ZALOPULSE
+            resDiv.innerHTML = `
+                <div class="success-box">
+                    ${data.queue_pos > 1 ? `<p style="color:#ff4757; font-size:0.8rem;">Bạn đã được xử lý xong từ vị trí số ${data.queue_pos}</p>` : ''}
+                    <p style="color: var(--success-color); font-size: 1.2rem; font-weight: bold;">✅ Chuyển đổi thành công!</p>
+                    
+                    <a href="${data.affiliate_link}" target="_blank" class="buy-now-btn">
+                        <span class="sticker">🔥</span> MUA NGAY - ĐỪNG BỎ LỠ! <span class="sticker">🛒</span>
+                    </a>
+                    
+                    <hr>
+                    <div class="commission-info">
+                        💰 <b>Hoa hồng của bạn:</b> 4.5% - 15%<br>
+                        <span>Nhấn vào biểu tượng Zalo để nhận thưởng!</span>
+                    </div>
+                    
+                    <a href="https://zalo.me/0328982137" target="_blank" class="zalo-container">
+                        <div class="zalo-icon-wrapper">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+                        </div>
+                        <span class="zalo-text">Nhắn tin cho Admin</span>
+                    </a>
+                </div>
+            `;
             
-            confetti({...}); // Bắn pháo hoa
+            // Bắn pháo hoa ăn mừng
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                zIndex: 9999
+            });
+        } else if (data.error) {
+            resDiv.innerText = "❌ " + data.error;
         }
     } catch (err) {
         resDiv.innerText = "🚫 Check Ngrok/Server Thọ ơi!";
     }
 }
 
-// --- TÍNH NĂNG 2: BÓI TOÁN ---
+// --- 3. TÍNH NĂNG 2: BÓI TOÁN ---
 async function askMasterTho() {
     const question = document.getElementById('fortuneQuestion').value.trim();
     const resDiv = document.getElementById('fortune-result');
