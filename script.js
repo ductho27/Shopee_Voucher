@@ -66,9 +66,11 @@ async function convertLink() {
                         💰 <b>Hoa hồng của bạn:</b> 4.5% - 15%<br>
                         <span>Nhấn vào nút dưới đây để nhận thưởng nhé!</span>
                     </div>
-                    <a href="https://zalo.me/0328982137" target="_blank" class="zalo-btn">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
-                        Liên hệ Zalo Admin
+                    <a href="https://zalo.me/SỐ_ĐIỆN_THOẠI" target="_blank" class="zalo-container">
+                        <div class="zalo-icon-wrapper">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+                        </div>
+                        <span class="zalo-text">Nhắn tin cho Admin</span>
                     </a>
                 </div>
             `;
