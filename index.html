@@ -4,82 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Đức Thọ & Affiliate</title>
+
+    <script type="text/javascript">
+        var _atsmarttag = {
+            pub_id: '5318594335759026755' // ID chuẩn của Thọ
+        };
+        (function () {
+            var script = document.createElement('script');
+            script.src = '//static.accesstrade.vn/js/v2/atsmarttag.min.js?v=1.1.0';
+            script.type = 'text/javascript';
+            script.async = true;
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+        })();
+    </script>
     <style>
         :root {
             --primary-color: #0056b3;
             --success-color: #28a745;
             --bg-color: #f4f7f6;
             --danger-color: #d9534f;
+            --shopee-orange: #ee4d2d;
         }
 
         body { 
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             background-color: var(--bg-color); 
-            margin: 0; 
-            padding: 10px;
-            color: #333;
+            margin: 0; padding: 10px; color: #333;
         }
 
         .container { 
-            max-width: 600px; 
-            margin: 20px auto; 
-            background: white; 
-            padding: 25px; 
+            max-width: 600px; margin: 20px auto; 
+            background: white; padding: 25px; 
             border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
         }
 
-        h2 { color: var(--primary-color); font-size: 1.5rem; margin-bottom: 20px; }
-        h4 { margin-bottom: 15px; color: #555; }
+        h2 { color: var(--primary-color); font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+        h4 { margin-bottom: 15px; color: #555; border-left: 4px solid var(--shopee-orange); padding-left: 10px; }
 
-        /* Màn hình đăng nhập */
-        #login-screen { padding: 10px 0; }
-
-        /* Nội dung chính */
         #main-content { display: none; }
 
         .team-section { 
-            display: flex; 
-            justify-content: center; 
-            gap: 20px; 
-            padding: 10px 0; 
-            margin-bottom: 20px;
-            overflow-x: auto;
+            display: flex; justify-content: center; gap: 20px; 
+            padding: 10px 0; margin-bottom: 20px; overflow-x: auto;
         }
 
+        .member-card { text-align: center; }
         .member-card img { 
-            width: 70px; height: 70px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 3px solid #eef2f7;
+            width: 70px; height: 70px; border-radius: 50%; 
+            object-fit: cover; border: 3px solid #eef2f7;
         }
 
         .converter-box { 
-            background: #f8f9fa; 
-            padding: 20px; 
-            border-radius: 15px; 
-            margin-bottom: 20px;
-            border: 1px solid #eee;
+            background: #f8f9fa; padding: 20px; 
+            border-radius: 15px; margin-bottom: 20px; border: 1px solid #eee;
         }
 
         input { 
             width: 100%; box-sizing: border-box;
-            padding: 12px 15px; 
-            border: 2px solid #ddd; 
-            border-radius: 10px; 
-            margin-bottom: 15px; 
-            font-size: 16px; 
+            padding: 12px 15px; border: 2px solid #ddd; 
+            border-radius: 10px; margin-bottom: 15px; font-size: 16px; 
         }
 
         button { 
-            width: 100%; 
-            background: var(--success-color); 
-            color: white; border: none; 
-            padding: 14px; border-radius: 10px; 
-            cursor: pointer; font-size: 16px; font-weight: bold;
+            width: 100%; background: var(--shopee-orange); 
+            color: white; border: none; padding: 14px; 
+            border-radius: 10px; cursor: pointer; 
+            font-size: 16px; font-weight: bold; transition: 0.3s;
         }
 
+        button:hover { opacity: 0.9; transform: translateY(-2px); }
+
         .btn-logout { background: #6c757d; margin-top: 15px; padding: 10px; font-size: 14px; }
+
+        #result-box {
+            margin-top: 15px; padding: 15px; border-radius: 10px;
+            display: none; word-break: break-all;
+        }
 
         .aff-links a { 
             display: flex; align-items: center; justify-content: center;
@@ -97,7 +98,7 @@
         <div class="converter-box">
             <input type="text" id="staffIdInput" placeholder="Nhập mã nhân viên (VD: V001)...">
             <button onclick="handleLogin()">Vào Hệ Thống</button>
-            <p id="login-msg" style="color: var(--danger-color); margin-top: 10px; font-weight: bold;"></p>
+            <p id="login-msg" style="color: var(--danger-color); margin-top: 10px; font-weight: bold; text-align: center;"></p>
         </div>
     </div>
 
@@ -106,24 +107,28 @@
         
         <div class="team-section">
             <div class="member-card">
-                <img src="images.jpg" alt="Duc Tho"><p>Duc Tho</p>
+                <img src="https://via.placeholder.com/70" alt="Duc Tho"><p>Duc Tho</p>
             </div>
             <div class="member-card">
-                <img src="admin2.jpg" alt="Bảnh Bỏn"><p>Bảnh Bỏn</p>
+                <img src="https://via.placeholder.com/70" alt="Bảnh Bỏn"><p>Bảnh Bỏn</p>
             </div>
         </div>
 
         <div class="converter-box">
             <h4>Chuyển đổi Link Shopee</h4>
-            <input type="text" id="rawLink" placeholder="Dán link sản phẩm Shopee vào đây...">
-            <button onclick="convertLink()">Lấy Link Affiliate</button>
-            <p id="result"></p>
+            <input type="text" id="rawLink" placeholder="Dán link Shopee (shopee.vn/...)">
+            <button onclick="convertLink()">Lấy Link Kiếm Tiền</button>
+            
+            <div id="result-box">
+                <p id="status-msg"></p>
+                <div id="final-link-area"></div>
+            </div>
         </div>
 
         <div class="aff-links">
             <h4>Sản phẩm khuyên dùng</h4>
-            <a href="#" target="_blank">🛒 Máy tính X99 Cấu Hình Khủng</a>
-            <a href="#" target="_blank">🎧 Tai nghe Kiểm âm DJ</a>
+            <a href="https://shopee.vn/search?keyword=x99" target="_blank">🛒 Máy tính X99 Cấu Hình Khủng</a>
+            <a href="https://shopee.vn/search?keyword=tai+nghe+dj" target="_blank">🎧 Tai nghe Kiểm âm DJ</a>
         </div>
 
         <button class="btn-logout" onclick="handleLogout()">Đăng xuất</button>
@@ -131,9 +136,7 @@
 </div>
 
 <script>
-    const myApiUrl = "https://5a6b-2001-ee0-4141-611d-6406-3e56-ace5-639a.ngrok-free.app/convert"; // Cập nhật link Ngrok ở đây
-
-    // --- LOGIC ĐĂNG NHẬP ---
+    // --- 1. LOGIC ĐĂNG NHẬP ---
     async function handleLogin() {
         const staffId = document.getElementById('staffIdInput').value.trim().toUpperCase();
         const msg = document.getElementById('login-msg');
@@ -144,9 +147,9 @@
         }
 
         try {
-            // Tải file employees.json từ GitHub của bạn
+            // Giả lập hoặc fetch từ GitHub của Thọ
             const response = await fetch('employees.json');
-            if (!response.ok) throw new Error("Không thấy file employees.json");
+            if (!response.ok) throw new Error("Lỗi tải danh sách");
             
             const userList = await response.json();
 
@@ -159,7 +162,7 @@
                 msg.innerText = "❌ Mã nhân viên không tồn tại!";
             }
         } catch (err) {
-            msg.innerText = "⚠️ Lỗi: Kiểm tra file employees.json trên GitHub!";
+            msg.innerText = "⚠️ Lỗi: Không tìm thấy file employees.json!";
         }
     }
 
@@ -174,55 +177,47 @@
         location.reload();
     }
 
-    // Tự động kiểm tra đăng nhập khi mở trang
     window.onload = () => {
         const savedName = localStorage.getItem('userName');
         if (savedName) showMainContent(savedName);
     }
 
-    // --- LOGIC LẤY LINK (Giữ nguyên bản gốc của Thọ + Gửi staffId) ---
-    async function convertLink() {
+    // --- 2. LOGIC LẤY LINK (Kết hợp SmartTag + SubID) ---
+    function convertLink() {
         const userLink = document.getElementById('rawLink').value.trim();
-        const resDiv = document.getElementById('result');
-        const staffId = localStorage.getItem('staffId'); 
+        const resultBox = document.getElementById('result-box');
+        const statusMsg = document.getElementById('status-msg');
+        const linkArea = document.getElementById('final-link-area');
+        const staffId = localStorage.getItem('staffId') || "GUEST"; 
 
         if(!userLink) {
-            resDiv.style.color = "var(--danger-color)";
-            resDiv.innerText = "⚠️ Thọ ơi, vui lòng dán link đã nhé!";
+            alert("Thọ ơi, dán link vào đã!");
             return;
         }
 
         const shopeeRegex = /shopee\.vn|shope\.ee/;
         if (!shopeeRegex.test(userLink)) {
-            resDiv.style.color = "var(--danger-color)";
-            resDiv.innerText = "❌ Link này không phải của Shopee!";
+            alert("Đây không phải link Shopee Thọ ơi!");
             return;
         }
 
-        resDiv.style.color = "var(--primary-color)";
-        resDiv.innerText = "🔍 Đang điều khiển Bot... chờ xíu nhé!";
+        // BƯỚC QUAN TRỌNG: Gắn staffId vào link gốc dưới dạng UTM để SmartTag ghi nhận
+        let separator = userLink.includes('?') ? '&' : '?';
+        let customLink = `${userLink}${separator}utm_content=${staffId}&utm_source=ThoTeam`;
 
-        try {
-            const response = await fetch(myApiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    link: userLink,
-                    staff_id: staffId // Gửi kèm mã NV để Bot xử lý Sub_ID
-                })
-            });
-            const data = await response.json();
-            
-            if (data.error) {
-                resDiv.style.color = "var(--danger-color)";
-                resDiv.innerText = "⚠️ Shopee báo lỗi link này, kiểm tra lại nhé.";
-            } else {
-                resDiv.innerHTML = `✅ Xong! <a href="${data.affiliate_link}" target="_blank" style="color: var(--success-color); font-weight: bold;">Mở Link Affiliate</a>`;
-            }
-        } catch (err) {
-            resDiv.style.color = "var(--danger-color)";
-            resDiv.innerText = "🚫 Lỗi kết nối Bot (Check Ngrok)!";
-        }
+        // Hiển thị kết quả
+        resultBox.style.display = "block";
+        resultBox.style.backgroundColor = "#e8f5e9";
+        statusMsg.style.color = "var(--success-color)";
+        statusMsg.innerHTML = "<b>✅ Đã gắn mã cá nhân!</b>";
+        
+        // SmartTag sẽ tự động chuyển đổi link này khi khách click vào
+        linkArea.innerHTML = `
+            <p style='font-size: 13px; color: #666;'>Gửi link này cho khách, hoa hồng sẽ tính cho <b>${staffId}</b>:</p>
+            <a href="${customLink}" target="_blank" style="color: var(--primary-color); font-weight: bold; text-decoration: underline;">
+                ${customLink.substring(0, 50)}...
+            </a>
+        `;
     }
 </script>
 </body>
