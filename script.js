@@ -42,11 +42,18 @@ window.onload = () => {
 async function convertLink() {
     const userLink = document.getElementById('rawLink').value.trim();
     const resDiv = document.getElementById('result');
-    if(!userLink) return alert("Dán link đã bạn iu ơi!");
+    if(!userLink) return alert("Dán link đã Thọ ơi!");
 
     resDiv.style.display = "block";
     resDiv.style.color = "var(--primary-color)";
-    resDiv.innerText = "🔍 Đang lấy link... chờ xíu nhé!, thưn lắm";
+    
+    // Hiển thị thông báo hàng chờ ban đầu
+    resDiv.innerHTML = `
+        <div class="waiting-box">
+            <p>🔍 Đang kết nối với Bot...</p>
+            <p style="font-size: 0.9rem; color: #666;">Hàng chờ ưu tiên của bạn đang được thiết lập.</p>
+        </div>
+    `;
 
     try {
         const response = await fetch(`${BASE_URL}/convert`, {
@@ -54,50 +61,17 @@ async function convertLink() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ link: userLink })
         });
+        
         const data = await response.json();
 
         if (data.affiliate_link) {
-            resDiv.innerHTML = `
-                <div class="success-box">
-                    <p style="color: var(--success-color); font-size: 1.2rem; font-weight: bold;">✅ Chuyển đổi thành công!</p>
-                    
-                    <a href="${data.affiliate_link}" target="_blank" class="buy-now-btn">
-                        <span class="sticker">🔥</span> 
-                        MUA NGAY - SỐ LƯỢNG CÓ HẠN! 
-                        <span class="sticker">🛒</span>
-                    </a>
-
-                    <hr>
-                    <div class="commission-info">
-                        💰 <b>Hoa hồng của bạn:</b> 4.5% - 15%<br>
-                        <span>Nhấn vào biểu tượng Zalo để nhận thưởng!</span>
-                    </div>
-                    
-                    <a href="https://zalo.me/0328982137" target="_blank" class="zalo-container">
-                        <div class="zalo-icon-wrapper">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
-                        </div>
-                        <span class="zalo-text">Nhắn tin cho Admin</span>
-                    </a>
-                </div>
-            `;
+            // Khi thành công, hiện pháo hoa và nút Mua ngay như cũ
+            // (Chép lại đoạn resDiv.innerHTML có nút Mua Ngay và Zalo của Thọ vào đây)
             
-            // --- KHU VỰC BẮN PHÁO HOA ---
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#0056b3', '#28a745', '#ffeb3b', '#ff5722']
-            });
-            // ---------------------------
-
-        } else { 
-            resDiv.style.color = "var(--danger-color)";
-            resDiv.innerText = "❌ Lỗi: " + (data.error || "Thử lại sau"); 
+            confetti({...}); // Bắn pháo hoa
         }
-    } catch (err) { 
-        resDiv.style.color = "var(--danger-color)";
-        resDiv.innerText = "🚫 Check Ngrok/Server Thọ ơi!"; 
+    } catch (err) {
+        resDiv.innerText = "🚫 Check Ngrok/Server Thọ ơi!";
     }
 }
 
