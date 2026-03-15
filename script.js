@@ -1,5 +1,5 @@
 // --- ĐỊA CHỈ NGROK ---
-const BASE_URL = "https://eaa8-2001-ee0-4141-611d-f998-7707-f08c-c584.ngrok-free.app"; 
+const BASE_URL = "http://127.0.0.1:5000"; 
 
 // --- XỬ LÝ ĐĂNG NHẬP ---
 async function handleLogin() {
@@ -96,6 +96,37 @@ async function convertLink() {
         resDiv.innerText = "🚫 Check Ngrok/Server Thọ ơi!"; 
     }
 }
+
+// --- TÍNH NĂNG: VOUCHER TỰ ĐỘNG ---
+async function updateVouchers() {
+    const response = await fetch('http://localhost:5000/get_vouchers');
+    const vouchers = await response.json();
+    
+    const container = document.querySelector('.voucher-list');
+    container.innerHTML = ''; // Xóa cái cũ đi
+
+    vouchers.forEach(v => {
+        container.innerHTML += `
+            <div class="voucher-card" onclick="window.open('${v.link}', '_blank')">
+                <div class="voucher-left">
+                    <i class="fas fa-ticket-alt"></i>
+                    <p>SHOPEE</p>
+                </div>
+                <div class="voucher-right">
+                    <div class="voucher-info">
+                        <h4>${v.title}</h4>
+                        <p>${v.desc}</p>
+                        <small>${v.hsd}</small>
+                    </div>
+                    <button class="btn-save">LƯU MÃ</button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// Chạy ngay khi web vừa mở
+updateVouchers();
 
 // --- TÍNH NĂNG 2: BÓI TOÁN ---
 async function askMasterTho() {
