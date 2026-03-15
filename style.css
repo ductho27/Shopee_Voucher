@@ -469,3 +469,180 @@ a[target="_blank"]:hover {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+/* Tổng thể khu vực Voucher */
+.voucher-section {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Font chuẩn hiện đại */
+    padding: 10px;
+}
+
+.voucher-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.voucher-card {
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08));
+    border: 1px solid #f0f0f0;
+    min-height: 110px; /* Dùng min-height để không bị thiếu nội dung */
+    position: relative;
+    overflow: visible; /* Để hiện răng cưa rõ hơn */
+}
+
+/* Phần bên trái - Chỉnh lại tỉ lệ */
+.voucher-left {
+    width: 100px; /* Cố định độ rộng phần cam */
+    background: #ee4d2d;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px 0 0 8px;
+    position: relative;
+}
+
+/* Răng cưa mịn hơn */
+.voucher-left::after {
+    content: "";
+    position: absolute;
+    right: -6px;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    background-image: radial-gradient(circle at 6px 6px, transparent 3px, #fff 3.5px);
+    background-size: 12px 12px;
+}
+
+.voucher-left i { font-size: 1.8rem; margin-bottom: 5px; }
+.voucher-left p { font-size: 11px; font-weight: 600; text-align: center; margin: 0; }
+
+/* Phần bên phải - Nội dung đầy đủ */
+.voucher-right {
+    flex: 1;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 0 8px 8px 0;
+}
+
+.voucher-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Khoảng cách giữa các dòng */
+}
+
+.voucher-info h4 { 
+    margin: 0; 
+    color: #222; 
+    font-size: 14px; 
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.voucher-info p { 
+    margin: 0; 
+    color: #757575; 
+    font-size: 12px; 
+}
+
+.voucher-info small { 
+    color: #2673dd; 
+    font-size: 11px; 
+    display: block;
+    margin-top: 2px;
+}
+
+/* Nút bấm gọn gàng không đè chữ */
+.btn-save {
+    background: #ee4d2d;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap; /* Không cho chữ nhảy dòng */
+    margin-left: 10px;
+}
+
+/* Hiệu ứng Zoom và Loang màu cho Voucher */
+.voucher-card {
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));
+    border: 1px solid #f0f0f0;
+    min-height: 115px;
+    position: relative;
+    overflow: hidden; /* Bắt buộc để vệt sáng không tràn ra ngoài */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Chuyển động mượt mà hơn */
+    cursor: pointer;
+}
+
+/* Hiệu ứng Zoom nhẹ khi chạm (hover) */
+.voucher-card:hover {
+    transform: scale(1.02) translateY(-3px); /* Hơi to ra và nổi lên */
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+}
+
+/* HIỆU ỨNG LOANG MÀU (SHIMMER) */
+.voucher-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%; /* Bắt đầu từ xa bên trái */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transition: all 0.6s ease;
+    z-index: 2; /* Nằm trên cả nội dung để tạo hiệu ứng ánh kim */
+    pointer-events: none;
+}
+
+/* Kích hoạt loang màu khi chạm vào */
+.voucher-card:hover::before {
+    left: 150%; /* Chạy lướt nhanh sang bên phải */
+}
+
+/* Chỉnh lại phần chữ cho thanh thoát và không bị che */
+.voucher-info h4 { 
+    font-size: 15px; 
+    color: #ee4d2d; /* Đổi màu tiêu đề cho bắt mắt */
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.voucher-info p { 
+    font-size: 12px; 
+    color: #555;
+    margin: 2px 0;
+}
+
+.voucher-info small { 
+    color: #999;
+    font-size: 11px;
+}
+
+/* Nút bấm cũng phải có hiệu ứng nảy */
+.btn-save {
+    background: linear-gradient(135deg, #f53d2d, #ee4d2d);
+    transition: transform 0.2s ease;
+}
+
+.btn-save:active {
+    transform: scale(0.9); /* Hiệu ứng nhấn nút */
+}
