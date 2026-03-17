@@ -685,3 +685,44 @@ a[target="_blank"]:hover {
         box-shadow: 0 0 0 0 rgba(255, 87, 34, 0);
     }
 }
+
+.top-notice {
+    width: 100%;
+    background: linear-gradient(90deg, #ff5722, #ff9800);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px 10px;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    animation: slideDown 0.6s ease;
+}
+
+/* hiệu ứng xuất hiện */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* hiệu ứng nhấp nháy nhẹ */
+.top-notice {
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px rgba(255,87,34,0.5);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(255,152,0,0.8);
+    }
+}
