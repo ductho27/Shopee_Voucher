@@ -722,28 +722,38 @@ a[target="_blank"]:hover {
 }
 
 .top-notice-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
     position: sticky;
     top: 0;
     z-index: 9999;
-    padding: 8px 10px;
-    background: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding: 10px 0; /* chỉ padding trên dưới */
+
+    box-sizing: border-box;
 }
 
 /* khung chính */
 .top-notice-content {
+    max-width: 95%; /* tránh tràn mobile */
+    width: fit-content;
+
+    text-align: center;
+    margin: 0 auto;
+
+    padding: 10px 18px;
+    border-radius: 999px;
+
     background: linear-gradient(90deg, #ff5722, #ff9800);
     color: #fff;
     font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 999px;
-    text-align: center;
-    font-size: 14px;
+    font-size: 13px;
+
     box-shadow: 0 4px 20px rgba(255, 87, 34, 0.4);
-    
-    /* animation */
+
     animation: floatUp 0.6s ease, pulseGlow 2s infinite alternate;
 }
 
@@ -779,4 +789,16 @@ a[target="_blank"]:hover {
 .top-notice-content:hover {
     transform: scale(1.05);
     cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .top-notice-content {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
