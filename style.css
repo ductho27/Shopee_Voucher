@@ -819,13 +819,13 @@ body {
 /* Định nghĩa một ngôi sao cơ bản */
 .star {
     position: absolute;
-    background-color: #ffeb3b; /* Màu vàng xinh xắn (Material Yellow) */
-    border-radius: 50%; /* Làm cho sao tròn */
-    /* Hiệu ứng tỏa sáng nhẹ ban đầu */
-    box-shadow: 0 0 5px #fff176, 0 0 10px #fff176; 
-    
-    /* Gán hiệu ứng nhấp nháy */
-    animation: twinkle linear infinite; 
+    background-color: #ffeb3b;
+    border-radius: 50%;
+    /* Dùng will-change để báo trước cho trình duyệt chuẩn bị card đồ họa */
+    will-change: opacity, transform; 
+    animation: twinkle linear infinite;
+    /* Xóa bỏ box-shadow nếu máy vẫn lag, hoặc chỉ để 1 lớp nhẹ */
+    box-shadow: 0 0 3px #fff176; 
 }
 
 /* Định nghĩa hiệu ứng nhấp nháy rực rỡ */
