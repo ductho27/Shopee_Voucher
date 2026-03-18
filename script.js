@@ -192,22 +192,23 @@ function launchUFO() {
 
     const ufo = document.createElement('div');
     ufo.classList.add('ufo');
-    ufo.innerHTML = '🛸'; // Sử dụng Emoji UFO
+    ufo.innerHTML = '🛸';
 
-    // Vị trí xuất hiện ngẫu nhiên theo chiều dọc (từ 10% đến 80% màn hình)
-    const randomTop = Math.floor(Math.random() * 70) + 10;
+    // MỞ RỘNG PHẠM VI: Cho phép bay từ 5% đến 95% màn hình
+    const randomTop = Math.floor(Math.random() * 90) + 5; 
     ufo.style.top = randomTop + '%';
 
-    // Thời gian bay (tốc độ) ngẫu nhiên từ 5s đến 10s
-    const duration = Math.floor(Math.random() * 5) + 5;
-    ufo.style.animation = `ufo-fly ${duration}s linear forwards`;
+    // NGẪU NHIÊN HƯỚNG BAY: Lúc từ trái sang, lúc từ phải sang
+    const isLeftToRight = Math.random() > 0.5;
+    
+    if (isLeftToRight) {
+        ufo.style.animation = `ufo-fly-right ${Math.random() * 5 + 5}s linear forwards`;
+    } else {
+        ufo.style.animation = `ufo-fly-left ${Math.random() * 5 + 5}s linear forwards`;
+    }
 
     space.appendChild(ufo);
-
-    // Xóa UFO sau khi bay xong để nhẹ trình duyệt
-    setTimeout(() => {
-        ufo.remove();
-    }, duration * 1000);
+    setTimeout(() => ufo.remove(), 10000);
 }
 
 // Thiết lập thời gian xuất hiện ngẫu nhiên (khoảng 10-20 giây lại có 1 chiếc)
