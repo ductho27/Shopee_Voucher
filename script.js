@@ -213,7 +213,7 @@ function launchUFO() {
 
 // Thiết lập thời gian xuất hiện ngẫu nhiên (khoảng 10-20 giây lại có 1 chiếc)
 function scheduleUFO() {
-    const randomDelay = Math.random() * 10000 + 10000; // 10s đến 20s
+    const randomDelay = Math.random() * 20000 + 15000; // 10s đến 20s
     setTimeout(() => {
         launchUFO();
         scheduleUFO(); // Lặp lại lịch trình
