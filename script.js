@@ -156,7 +156,7 @@ window.addEventListener('load', function() {
 
 function createStars() {
     const starfield = document.getElementById('starfield');
-    const numberOfStars = 60; // Số lượng ngôi sao bạn muốn (tăng lên nếu muốn rực rỡ hơn)
+    const numberOfStars = 15; // Số lượng ngôi sao bạn muốn (tăng lên nếu muốn rực rỡ hơn)
 
     for (let i = 0; i < numberOfStars; i++) {
         // Tạo một phần tử div mới cho mỗi ngôi sao
