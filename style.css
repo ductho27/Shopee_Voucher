@@ -117,7 +117,8 @@ button:hover { opacity: 0.9; }
 
 /* Khi di chuột vào nút sẽ hơi rung nhẹ */
 button:hover {
-    animation: shake 0.5s infinite;
+    transform: scale(1.05); /* Phóng to 5% */
+    transition: transform 0.2s ease-in-out; /* Giúp hiệu ứng mượt hơn */
 }
 
 /* Hiệu ứng đặc biệt khi nút đang bận (đang chạy bot) */
