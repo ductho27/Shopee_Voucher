@@ -76,7 +76,6 @@ async function convertLink() {
                     <hr>
                     <div class="commission-info">
                         💰 <b>Hoa hồng của bạn:</b> 4.5% - 15% (Mã: ${currentStaffId})<br>
-                        <span>Nhấn vào biểu tượng Zalo để nhận thưởng!</span>
                     </div>
                     <a href="https://zalo.me/0328982137" target="_blank" class="zalo-container">
                         <div class="zalo-icon-wrapper">
